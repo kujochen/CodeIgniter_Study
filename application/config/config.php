@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/CodeIgniter-3.1.5/';
+$config['base_url'] = 'http://localhost/CI/';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +35,8 @@ $config['base_url'] = 'http://localhost/CodeIgniter-3.1.5/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
-
+$config['index_page'] = '';
+//$config['index_page'] = 'index.php'; 移除 URL 中的 index.php
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL
@@ -64,8 +64,8 @@ $config['uri_protocol']	= 'REQUEST_URI';
 |
 | https://codeigniter.com/user_guide/general/urls.html
 */
-$config['url_suffix'] = '.html';
-
+$config['url_suffix'] = '';
+//$config['url_suffix'] = '.html';
 /*
 |--------------------------------------------------------------------------
 | Default Language

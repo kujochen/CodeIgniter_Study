@@ -27,19 +27,19 @@ class News extends CI_Controller {
         print_r($data);
     }
 
-    //新闻详细页面
+    //新闻详细
     public function view($slug = NULL)
     {
         $data['news_item'] = $this->news_model->get_news($slug); //使用news_model模型的get_news()获得所有新闻条目（带参数）
 
-        if (empty($data['news_item']))
+        /*if (empty($data['news_item']))
         {
             show_404(); //新闻条目为空显示404
-        }
+        }*/
 
-        $data['title'] = $data['news_item']['title'];
+        //$data['title'] = $data['news_item']['title'];
 
-        $this->load->view('templates/header', $data);
+        //$this->load->view('templates/header', $data);
         $this->load->view('news/view', $data);
         $this->load->view('templates/footer');
 
@@ -50,5 +50,29 @@ class News extends CI_Controller {
         print_r($data);
     }
 
+    /**
+     * 创建新闻
+     * todo 检查表单是否被提交，以及提交的数据是否能通过验证规则
+     */
+    public function create(){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $data['title']='创建一个新的新闻';
+
+        //设置验证规则
+        //set_rules(表单中字段的名称,错误信息中使用的名称,验证规则)
+        $this->form_validation->set_rules('title', '标题', 'required');
+        $this->form_validation->set_rules('text', '文本', 'required');
+
+        if($this->form_validation->run()==false){
+            $this->load->view('templates/header',$data);
+            $this->load->view('news/create');
+            $this->load->view('templates/footer');
+        }else{
+            $this->news_model->set_news();
+            $this->load->view('news/success');
+        }
+    }
 
 }

@@ -1,4 +1,5 @@
-<h2><?php echo $title; ?></h2>
+
+<p><h2><a href="<?php echo site_url('news/create'); ?>">新增新闻</a></h2></p>
 
 <?php foreach ($news as $news_item): ?>
 
