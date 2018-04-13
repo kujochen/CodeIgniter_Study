@@ -19,6 +19,11 @@ class News extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('news/index', $data);
         $this->load->view('templates/footer');
+
+        //启用分析器
+        $this->output->enable_profiler(TRUE);
+        /*//使用缓存（30分钟刷新一次）
+        $this->output->cache(30);*/
         print_r($data);
     }
 
@@ -37,6 +42,11 @@ class News extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('news/view', $data);
         $this->load->view('templates/footer');
+
+        //启用分析器
+        $this->output->enable_profiler(TRUE);
+        /*//使用缓存（30分钟刷新一次）
+        $this->output->cache(30);*/
         print_r($data);
     }
 
