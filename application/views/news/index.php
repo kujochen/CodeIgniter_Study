@@ -3,9 +3,9 @@
     <div class="main">
         <?=$news_item['text']?>
     </div>
-    <p><a href="<?=site_url('news/'.$news_item['slug'])?>">详细查看</a>
-        <a href="">修改</a>
-        <a name="<?=$news_item['id']?>" href="<?=site_url('news/delete/'.$news_item['id'])?>">删除</a>
+    <p><a href="<?=site_url('news/'.$news_item['id'])?>">详细查看</a>
+        <a href="<?=site_url('news/fix/'.$news_item['id'])?>">修改</a>
+        <a href="<?=site_url('news/delete/'.$news_item['id'])?>">删除</a>
     </p>
     <hr />
 <?php endforeach; ?>

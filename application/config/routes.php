@@ -55,6 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 /*自定义的路由规则（有先后顺序）*/
 $route['news/create'] = 'news/create';
 $route['news/delete/(:any)'] = 'news/delete/$1';
+$route['news/fix/(:any)'] = 'news/fix/$1';
 $route['news/(:any)'] = 'news/view/$1';
 $route['news'] = 'news/index';
 $route['(:any)'] = 'pages/view/$1';

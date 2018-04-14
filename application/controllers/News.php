@@ -24,13 +24,13 @@ class News extends CI_Controller {
         $this->output->enable_profiler(TRUE);
         /*//使用缓存（30分钟刷新一次）
         $this->output->cache(30);*/
-        print_r($data);
+        //print_r($data);
     }
 
     //新闻详细
-    public function view($slug = NULL)
+    public function view($id = NULL)
     {
-        $data['news_item'] = $this->news_model->get_news($slug); //使用news_model模型的get_news()获得所有新闻条目（带参数）
+        $data['news_item'] = $this->news_model->get_news($id); //使用news_model模型的get_news()获得所有新闻条目（带参数）
 
         if (empty($data['news_item']))
         {
@@ -62,8 +62,8 @@ class News extends CI_Controller {
 
         //设置验证规则
         //set_rules(表单中字段的名称,错误信息中使用的名称,验证规则)
-        $this->form_validation->set_rules('title', '标题', 'required');
-        $this->form_validation->set_rules('text', '文本', 'required');
+        $this->form_validation->set_rules('title', '标题', 'required',array('required' => '标题不能为空'));
+        $this->form_validation->set_rules('text', '文本', 'required',array('required' => '文本不能为空'));
 
         if($this->form_validation->run()==false){
             $this->load->view('templates/header',$data);
@@ -71,7 +71,8 @@ class News extends CI_Controller {
             $this->load->view('templates/footer');
         }else{
             $this->news_model->set_news();
-            $this->load->view('news/success');
+            $data['success']='创建新闻';
+            $this->load->view('news/success',$data);
         }
     }
 
@@ -84,14 +85,49 @@ class News extends CI_Controller {
         }
 
         if($this->news_model->delete_news($id)==true){
-            $data['id']=$id;
-            $this->load->view('news/delete',$data);
+            $data['success']='删除ID为'.$id.'的新闻';
+            $this->load->view('news/success',$data);
         }else{
             //redirect('/news', 'auto',400);
             echo "<script>alert('删除失败！');</script>";
         };
         //启用分析器
         $this->output->enable_profiler(TRUE);
+    }
+
+    //修改新闻
+    public function fix($id = NULL){
+
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $data['news_item'] = $this->news_model->get_news($id); //使用news_model模型的get_news()获得所有新闻条目（带参数）
+
+        if (empty($data['news_item']))
+        {
+            show_404(); //新闻条目为空显示404
+        }
+
+        //设置验证规则
+        //set_rules(表单中字段的名称,错误信息中使用的名称,验证规则)
+        $this->form_validation->set_rules('title', '标题', 'required',array('required' => '标题不能为空'));
+        $this->form_validation->set_rules('text', '文本', 'required',array('required' => '文本不能为空'));
+
+        if($this->form_validation->run()==false){
+            $data['title']='修改'.$data['news_item']['title'];
+            $this->load->view('templates/header', $data);
+            $this->load->view('news/fix', $data);
+            $this->load->view('templates/footer');
+        }else{
+            $this->news_model->fix_news($id);
+            $data['success']='修改ID为'.$id.'的新闻';
+            $this->load->view('news/success',$data);
+        }
+
+        //启用分析器
+        $this->output->enable_profiler(TRUE);
+        print_r($data);
+
     }
 
 }
