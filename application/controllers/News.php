@@ -22,8 +22,8 @@ class News extends CI_Controller {
 
         //启用分析器
         $this->output->enable_profiler(TRUE);
-        /*//使用缓存（30分钟刷新一次）
-        $this->output->cache(30);*/
+        //使用缓存（30分钟刷新一次）
+        $this->output->cache(30);
         //print_r($data);
     }
 
@@ -45,8 +45,6 @@ class News extends CI_Controller {
 
         //启用分析器
         $this->output->enable_profiler(TRUE);
-        /*//使用缓存（30分钟刷新一次）
-        $this->output->cache(30);*/
         print_r($data);
     }
 
@@ -74,6 +72,11 @@ class News extends CI_Controller {
             $data['success']='创建新闻';
             $this->load->view('news/success',$data);
         }
+
+        //启用分析器
+        $this->output->enable_profiler(TRUE);
+        //使用缓存（30分钟刷新一次）
+        $this->output->cache(30);
     }
 
     //删除新闻
@@ -109,7 +112,7 @@ class News extends CI_Controller {
         }
 
         //设置验证规则
-        //set_rules(表单中字段的名称,错误信息中使用的名称,验证规则)
+        //set_rules(表单中字段的名称,错误信息中使用的名称,验证规则,设置自定义的错误信息)
         $this->form_validation->set_rules('title', '标题', 'required',array('required' => '标题不能为空'));
         $this->form_validation->set_rules('text', '文本', 'required',array('required' => '文本不能为空'));
 

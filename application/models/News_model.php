@@ -11,7 +11,7 @@ class News_model extends CI_Model {
     {
         if ($id === FALSE)
         {
-            $query = $this->db->get('news');
+           $query = $this->db->get('news');
             return $query->result_array();
         }
 
@@ -19,7 +19,7 @@ class News_model extends CI_Model {
         //urldecode()→url编码后的字符串还原成未编码的样子
         //$query = $this->db->get_where('news', array('slug' => urldecode($slug)));
         $query=$this->db->get_where('news', array('id' => intval($id)));
-        return $query->row_array();
+        return $query->row_array(); //返回单独一行row
     }
 
     //向数据库插入新闻数据
