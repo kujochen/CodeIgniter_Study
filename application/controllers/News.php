@@ -111,7 +111,7 @@ class News extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $data['news_item'] = $this->news_model->get_news($id); //使用news_model模型的get_news()获得所有新闻条目（带参数）
+        $data['news_item'] = $this->news_model->get_news(0,0,$id); //使用news_model模型的get_news()获得所有新闻条目（带参数）
 
         if (empty($data['news_item']))
         {
