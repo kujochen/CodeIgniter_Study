@@ -7,17 +7,17 @@ class News_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get_news($id = FALSE)
+    public function get_news($per_page=1,$page=0,$id = FALSE)
     {
         if ($id === FALSE)
         {
-           $query = $this->db->get('news');
+            //limit 查询$per_page个，从$page开始
+           $query = $this->db->limit($per_page,$page)->get('news');
             return $query->result_array();
         }
 
         //$query=$this->db->query("select * from news where slug=$slug");
-        //urldecode()→url编码后的字符串还原成未编码的样子
-        //array('slug' => urldecode($slug))
+        //array('slug' => urldecode($slug))  //urldecode()→url编码后的字符串还原成未编码的样子
         $query=$this->db->get_where('news', array('id' => intval($id)));
         return $query->row_array(); //返回单独一行row
     }

@@ -10,10 +10,17 @@ class News extends CI_Controller {
     }
 
     //新闻首页
-    public function index()
+    public function index($num = 0)
     {
-        $data['news'] = $this->news_model->get_news();  //使用news_model模型的get_news()获得所有新闻条目
+        //加载config/pagination.php
+        $this->load->library('pagination');
+        $config['per_page'] = 2;        //每个页面中希望展示的数量
+        $this->pagination->initialize($config);
+        $data['page']=$this->pagination->create_links();
+
+        $data['news'] = $this->news_model->get_news($config['per_page'],$num);  //使用news_model模型的get_news()获得所有新闻条目
         $data['title'] = '新闻首页';   //定义了标题
+
 
         //传递给视图
         $this->load->view('templates/header', $data);
@@ -23,14 +30,14 @@ class News extends CI_Controller {
         //启用分析器
         $this->output->enable_profiler(TRUE);
         //使用缓存（5分钟刷新一次）
-        //          $this->output->cache(5);
+        //$this->output->cache(5);
         //print_r($data);
     }
 
     //新闻详细
     public function view($id = NULL)
     {
-        $data['news_item'] = $this->news_model->get_news($id); //使用news_model模型的get_news()获得所有新闻条目（带参数）
+        $data['news_item'] = $this->news_model->get_news(0,0,$id); //使用news_model模型的get_news()获得所有新闻条目（带参数）
 
         if (empty($data['news_item']))
         {
@@ -39,7 +46,7 @@ class News extends CI_Controller {
 
         //$data['title'] = $data['news_item']['title'];
 
-        //$this->load->view('templates/header', $data);
+        $this->load->view('templates/header', $data['news_item']);
         $this->load->view('news/view', $data);
         $this->load->view('templates/footer');
 

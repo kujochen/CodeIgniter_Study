@@ -56,7 +56,8 @@ $route['translate_uri_dashes'] = FALSE;
 $route['news/create'] = 'news/create';
 $route['news/delete/(:any)'] = 'news/delete/$1';
 $route['news/fix/(:any)'] = 'news/fix/$1';
-$route['news/(:any)'] = 'news/view/$1';
+$route['news/view/(:any)'] = 'news/view/$1';
+$route['news/(:any)'] = 'news/index/$1';
 $route['news'] = 'news/index';
 $route['(:any)'] = 'pages/view/$1';
 
