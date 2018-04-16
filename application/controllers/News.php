@@ -22,8 +22,8 @@ class News extends CI_Controller {
 
         //启用分析器
         $this->output->enable_profiler(TRUE);
-        //使用缓存（30分钟刷新一次）
-        $this->output->cache(30);
+        //使用缓存（5分钟刷新一次）
+        //          $this->output->cache(5);
         //print_r($data);
     }
 
@@ -75,8 +75,8 @@ class News extends CI_Controller {
 
         //启用分析器
         $this->output->enable_profiler(TRUE);
-        //使用缓存（30分钟刷新一次）
-        $this->output->cache(30);
+        //使用缓存（5分钟刷新一次）
+        //$this->output->cache(5);
     }
 
     //删除新闻
