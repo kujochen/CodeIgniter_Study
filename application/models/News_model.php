@@ -17,7 +17,7 @@ class News_model extends CI_Model {
 
         //$query=$this->db->query("select * from news where slug=$slug");
         //urldecode()→url编码后的字符串还原成未编码的样子
-        //$query = $this->db->get_where('news', array('slug' => urldecode($slug)));
+        //array('slug' => urldecode($slug))
         $query=$this->db->get_where('news', array('id' => intval($id)));
         return $query->row_array(); //返回单独一行row
     }
