@@ -55,7 +55,7 @@ class News_model extends CI_Model {
             'text' => $this->input->post('text')
         );
         ;
-        $this->db->where('id', $id)->update('news',$data);
+        //$this->db->where('id', $id)->update('news',$data);
         //$change=$this->db->affected_rows();
         return $this->db->where('id', $id)->update('news',$data);
     }

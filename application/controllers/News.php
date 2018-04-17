@@ -6,7 +6,7 @@ class News extends CI_Controller {
     {
         parent::__construct();          //调用父类（CI_Controller）中的构造函数
         $this->load->model('news_model');   //加载模型 models/News_model.php
-        //$this->load->helper('url_helper');  //加载 URL 辅助函数 'url' 'url_helper'都行 视图中使用
+        $this->load->helper('url_helper');  //加载 URL 辅助函数 'url' 'url_helper'都行 视图中使用
     }
 
     //新闻首页
