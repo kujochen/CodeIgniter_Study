@@ -1,6 +1,4 @@
 <?php
-$rows=new News_model();
-
 $config['full_tag_open'] = '<ul class=pagination>';
 $config['full_tag_close'] = '</ul>';
 
@@ -28,5 +26,4 @@ $config['last_link'] = '尾页';
 $config['last_tag_close'] = '</li>';
 
 $config['base_url'] = 'http://localhost/CI/news/';      //分页所在的控制器类的完整的 URL
-$config['total_rows'] = $rows->db->count_all_results('news');    //数据总量
-$config['num_links'] = 3;                            //“数字”链接的数量
+$config['num_links'] = 1;                            //“数字”链接的数量
