@@ -25,5 +25,5 @@ $config['last_tag_open'] = '<li>';
 $config['last_link'] = '尾页';
 $config['last_tag_close'] = '</li>';
 
-$config['base_url'] = 'http://localhost/CI/news/';      //分页所在的控制器类的完整的 URL
+$config['base_url'] = 'http://localhost/CI/news/page/';      //分页所在的控制器类的完整的 URL
 $config['num_links'] = 1;                            //“数字”链接的数量

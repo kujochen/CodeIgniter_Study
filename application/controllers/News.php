@@ -34,7 +34,7 @@ class News extends CI_Controller {
             $this->load->view('templates/footer');
 
         }else{
-            $this->search($this->input->post('search'));
+            $this->search($_REQUEST['search'],0);
         };
         //启用分析器
         $this->output->enable_profiler(TRUE);
@@ -129,7 +129,7 @@ class News extends CI_Controller {
 
     }
     //查找新闻
-    public function search($search,$num = null){
+    public function search($search,$num = 0){
         $this->load->library('pagination');
         $config['base_url'] = 'http://localhost/CI/news/search/'.$search.'/page/';      //分页所在的控制器类的完整的 URL
         $config['num_links'] = 1;                            //“数字”链接的数量

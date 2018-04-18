@@ -1,3 +1,5 @@
+<?=site_url('news/search/'.$this->input->post('search'))?>
+
 <ul class="list-group">
     <?php foreach ($result as $news_item): ?>
         <h4>
@@ -9,5 +11,7 @@
         </h4>
     <?php endforeach; ?>
 </ul>
+<nav>
 <?=$page?>
+</nav>
 <p><a href="<?=site_url('news/')?>">返回首页</a></p>

@@ -1,4 +1,5 @@
 <div class="input-group">
+    <!--news/search/ -->
     <?php echo form_open('news/search/'); ?>
         <input type="text" placeholder="Search for..." name="search">
         <input type="submit" name="submit" value="搜索新闻" class="btn btn-default btn-sm">
@@ -20,22 +21,4 @@
 
 <nav>
     <?=$page?>
-<!--
-    <ul class="pagination">
-        <li>
-            <a href="#">
-                <span>&laquo;</span>
-            </a>
-        </li>
-        <li><a href="<?=site_url('news')?>">首页</a></li>
-        <li><a href="#">上一页</a></li>
-        <li><a href="#">下一页</a></li>
-        <li><a href="#">尾页</a></li>
-        <li>
-            <a href="#">
-                <span>&raquo;</span>
-            </a>
-        </li>
-    </ul>
--->
 </nav>
