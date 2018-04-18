@@ -3,7 +3,7 @@
 <!-- <?=validation_errors()?> -->
 
 <!--由表单辅助函数提供的，用于生成 form 元素，并添加一些额外的功能 -->
-<?php echo form_open('news/create'); ?>
+<?php echo form_open('news/create/'); ?>
 
 <div class="col-md-4 col-md-offset-4">
     <label for="title">标题</label>

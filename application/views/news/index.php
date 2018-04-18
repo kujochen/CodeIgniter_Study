@@ -1,3 +1,10 @@
+<div class="input-group">
+    <?php echo form_open('news/search/'); ?>
+        <input type="text" placeholder="Search for..." name="search">
+        <input type="submit" name="submit" value="搜索新闻" class="btn btn-default btn-sm">
+    <?=form_error('search', '<div class="error">', '</div><br />')?>
+    </form>
+</div>
 <ul class="list-group">
 <?php foreach ($news as $news_item): ?>
     <h4>

@@ -13,13 +13,16 @@ class News_model extends CI_Model {
     {
        //limit 查询$per_page个，从$page开始
        $query = $this->db->limit($per_page,$page)->get('news');
-       return $query->result_array();
+       $total_rows=$this->db->count_all('news');
+        $arr[0]=$query->result_array();
+        $arr[1]=$total_rows;
+       return $arr;
 
     }
 
     //详细新闻获取
     public function get_news_byID($id = NULL){
-        //array('slug' => urldecode($slug))  //urldecode()→url编码后的字符串还原成未编码的样子
+        //urldecode()→url编码后的字符串还原成未编码的样子
         $query=$this->db->get_where('news', array('id' => intval($id)));
         return $query->row_array(); //返回单独一行row
     }
@@ -55,8 +58,21 @@ class News_model extends CI_Model {
             'text' => $this->input->post('text')
         );
         ;
-        //$this->db->where('id', $id)->update('news',$data);
-        //$change=$this->db->affected_rows();
         return $this->db->where('id', $id)->update('news',$data);
+    }
+
+    //搜索新闻
+    public function search_news($per_page = NULL,$page = NULL,$search = NULL){
+        //$search=$this->input->post('search');
+        $array=array('title'=>urldecode($search),'text'=>urldecode($search));
+        $query=$this->db->select('id,title')->or_like($array)->limit($per_page,$page)->get('news');
+
+        $this->db->or_like($array)->from('news');
+        $total_rows=$this->db->count_all_results();
+
+        $arr[0]=$query->result_array();
+        $arr[1]=$total_rows;
+
+        return $arr;
     }
 }

@@ -12,17 +12,30 @@ class News extends CI_Controller {
     //新闻首页
     public function index($num = NULL)
     {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('search', '搜索栏', 'required',array('required' => '搜索栏不能为空'));
+
         $this->load->library('pagination');
         $config['per_page'] = 2;        //每个页面中希望展示的数量
-        $config['total_rows'] = $this->db->count_all_results('news');    //数据总量
+
+        $result=$this->news_model->get_news($config['per_page'],$num);  //使用news_model模型的get_news()获得所有新闻条目
+        $data['news'] = $result[0];
+        $data['title'] = '新闻首页';   //定义了标题
+
+        $config['total_rows'] = $result[1];    //数据总量
         $this->pagination->initialize($config);
         $data['page']=$this->pagination->create_links();
-        $data['news'] = $this->news_model->get_news($config['per_page'],$num);  //使用news_model模型的get_news()获得所有新闻条目
-        $data['title'] = '新闻首页';   //定义了标题
-        //传递给视图
-        $this->load->view('templates/header', $data);
-        $this->load->view('news/index', $data);
-        $this->load->view('templates/footer');
+
+        if($this->form_validation->run()==false){
+            //传递给视图
+            $this->load->view('templates/header', $data);
+            $this->load->view('news/index', $data);
+            $this->load->view('templates/footer');
+
+        }else{
+            $this->search($this->input->post('search'));
+        };
         //启用分析器
         $this->output->enable_profiler(TRUE);
         //使用缓存（5分钟刷新一次）
@@ -113,6 +126,31 @@ class News extends CI_Controller {
         //启用分析器
         $this->output->enable_profiler(TRUE);
         print_r($data);
+
+    }
+    //查找新闻
+    public function search($search,$num = null){
+        $this->load->library('pagination');
+        $config['base_url'] = 'http://localhost/CI/news/search/'.$search.'/page/';      //分页所在的控制器类的完整的 URL
+        $config['num_links'] = 1;                            //“数字”链接的数量
+        $config['per_page'] = 2;        //每个页面中希望展示的数量
+
+        $result=$this->news_model->search_news($config['per_page'],$num,$search);
+        $data['result']=$result[0];
+        if(empty($data['result'])){
+            show_404();
+        }
+        $config['total_rows'] = $result[1];    //数据总量
+        $this->pagination->initialize($config);
+        $data['page']=$this->pagination->create_links();
+
+        $data['title']='搜索结果';
+        $this->load->view('templates/header', $data);
+        $this->load->view('news/search',$data);
+        $this->load->view('templates/footer');
+
+        //启用分析器
+        $this->output->enable_profiler(TRUE);
 
     }
 
